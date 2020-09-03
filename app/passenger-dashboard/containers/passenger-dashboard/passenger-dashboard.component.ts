@@ -6,9 +6,11 @@ import { Passenger } from "../../models/Passenger.interface";
   styleUrls: ["passenger-dashboard.component.scss"],
   template: `
     <div>
-      <passenger-count></passenger-count>
+      <passenger-count
+        [items]="passengers">
+      </passenger-count>
+
       <passenger-detail></passenger-detail>
-      <h3>Airline Passengers</h3>
       <ul>
         <li *ngFor="let passenger of passengers; let i = index">
           <span class="status" [class.checked-in]="passenger.checkedIn"></span>
