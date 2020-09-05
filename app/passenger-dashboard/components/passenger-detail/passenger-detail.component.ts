@@ -1,4 +1,4 @@
-import { Component, Input, Output } from "@angular/core";
+import { Component, Input, Output, OnChanges, SimpleChanges, OnInit } from "@angular/core";
 import { Passenger } from "../../models/Passenger.interface";
 import { EventEmitter } from "@angular/common/src/facade/async";
 
@@ -39,7 +39,7 @@ import { EventEmitter } from "@angular/common/src/facade/async";
     </div>
   `,
 })
-export class PassengerDetailComponent {
+export class PassengerDetailComponent implements OnChanges, OnInit {
   @Input() detail: Passenger;
   @Output() edit: EventEmitter<any> = new EventEmitter();
   @Output() remove: EventEmitter<any> = new EventEmitter();
@@ -47,11 +47,23 @@ export class PassengerDetailComponent {
 
   constructor() {}
 
-  onNameChange(value: string) {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.detail) {
+      this.detail = Object.assign({}, changes.detail.currentValue);
+    }
+
+    console.log('ngOnChanges');
+  }
+
+  ngOnInit(): void {
+    console.log('ngOnInit');
+  }
+
+  onNameChange(value: string): void {
     this.detail.fullname = value;
   }
 
-  toggleEdit() {
+  toggleEdit(): void {
     if (this.editing) {
       this.edit.emit(this.detail);
     }
@@ -59,7 +71,7 @@ export class PassengerDetailComponent {
     this.editing = !this.editing;
   }
 
-  onRemove() {
+  onRemove(): void {
     this.remove.emit(this.detail);
   }
 }
