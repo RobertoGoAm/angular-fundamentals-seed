@@ -14,7 +14,7 @@ import { Passenger } from "../../models/Passenger.interface";
         *ngFor="let passenger of passengers;"
         [detail]="passenger"
         (remove)="handleRemove($event)"
-        (edit)="handleRemove($event)">
+        (edit)="handleEdit($event)">
       </passenger-detail>
     </div>
   `,
@@ -67,12 +67,20 @@ export class PassengerDashboardComponent implements OnInit {
     ];
   }
 
-  handleEdit(event) {
-    console.log(event);
+  handleEdit(event: Passenger): void {
+    this.passengers = this.passengers.map((passenger: Passenger) => {
+      if (passenger.id === event.id) {
+        passenger = Object.assign({}, passenger, event);
+      }
+
+      return passenger;
+    });
   }
 
-  handleRemove(event) {
-    console.log(event);
+  handleRemove(event: Passenger): void {
+    this.passengers = this.passengers.filter((passenger: Passenger) => {
+      return passenger.id !== event.id;
+    })
   }
 }
 
