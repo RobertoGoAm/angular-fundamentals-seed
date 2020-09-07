@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Passenger } from "../../models/Passenger.interface";
 import { PassengerDashboardService } from "../../passenger-dashboard.service";
+import { PassengerCountComponent } from "../../components/passenger-count/passenger-count.component";
 
 @Component({
   selector: "passenger-dashboard",
@@ -26,7 +27,9 @@ export class PassengerDashboardComponent implements OnInit {
   constructor(private passengerService: PassengerDashboardService) {}
 
   ngOnInit(): void {
-    this.passengers = this.passengerService.getPassengers();
+    this.passengerService
+      .getPassengers()
+      .subscribe((data: Passenger[]) => this.passengers = data);
   }
 
   handleEdit(event: Passenger): void {
