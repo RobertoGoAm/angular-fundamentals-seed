@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from "@angular/http";
+import { FormsModule } from "@angular/forms";
 
 // Container
 import { PassengerDashboardComponent } from "./containers/passenger-dashboard/passenger-dashboard.component";
@@ -8,6 +9,7 @@ import { PassengerDashboardComponent } from "./containers/passenger-dashboard/pa
 // Components
 import { PassengerCountComponent } from './components/passenger-count/passenger-count.component';
 import { PassengerDetailComponent } from './components/passenger-detail/passenger-detail.component';
+import { PassengerFormComponent } from './components/passenger-form/passenger-form.component';
 
 // Service
 import { PassengerDashboardService } from "./passenger-dashboard.service";
@@ -18,11 +20,13 @@ import { PassengerViewerComponent } from './containers/passenger-viewer/passenge
     PassengerDashboardComponent,
     PassengerViewerComponent,
     PassengerCountComponent,
-    PassengerDetailComponent
+    PassengerDetailComponent,
+    PassengerFormComponent
   ],
   imports: [
     CommonModule,
-    HttpModule
+    HttpModule,
+    FormsModule
   ],
   exports: [
     PassengerViewerComponent

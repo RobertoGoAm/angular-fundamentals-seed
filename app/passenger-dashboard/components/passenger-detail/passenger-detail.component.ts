@@ -25,10 +25,6 @@ import { EventEmitter } from "@angular/common/src/facade/async";
         {{ detail.checkInDate ? (detail.checkInDate | date: "yMMMMd" | uppercase) : "Not checked in" }}
       </div>
 
-      <div class="children">
-        Children: {{ detail.children?.length || 0 }}
-      </div>
-
       <button (click)="toggleEdit()">
         {{ editing ? 'Done' : 'Edit' }}
       </button>
