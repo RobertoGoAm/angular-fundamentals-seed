@@ -8,7 +8,6 @@ import { Passenger } from "../../models/Passenger.interface";
   styleUrls: ["passenger-form.component.scss"],
   template: `
     <form (ngSubmit)="handleSubmit(form.value, form.valid)" #form="ngForm" novalidate>
-      {{ detail | json }}
       <div>
         Passenger name:
         <input
