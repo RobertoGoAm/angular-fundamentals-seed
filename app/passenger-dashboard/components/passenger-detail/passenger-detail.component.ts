@@ -8,6 +8,7 @@ import { EventEmitter } from "@angular/common/src/facade/async";
   template: `
     <div>
       <span class="status" [class.checked-in]="detail.checkedIn"></span>
+
       <div *ngIf="editing">
         <input
           type="text"
@@ -32,13 +33,19 @@ import { EventEmitter } from "@angular/common/src/facade/async";
       <button (click)="onRemove()">
         Remove
       </button>
+
+      <button (click)="goToPassenger()">
+        View
+      </button>
     </div>
   `,
 })
 export class PassengerDetailComponent implements OnChanges, OnInit {
   @Input() detail: Passenger;
-  @Output() edit: EventEmitter<any> = new EventEmitter();
-  @Output() remove: EventEmitter<any> = new EventEmitter();
+  @Output() edit: EventEmitter<Passenger> = new EventEmitter<Passenger>();
+  @Output() remove: EventEmitter<Passenger> = new EventEmitter<Passenger>();
+  @Output() view: EventEmitter<Passenger> = new EventEmitter<Passenger>();
+
   editing: boolean = false;
 
   constructor() {}
@@ -57,6 +64,10 @@ export class PassengerDetailComponent implements OnChanges, OnInit {
 
   onNameChange(value: string): void {
     this.detail.fullname = value;
+  }
+
+  goToPassenger() {
+    this.view.emit(this.detail);
   }
 
   toggleEdit(): void {
